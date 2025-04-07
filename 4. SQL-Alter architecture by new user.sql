@@ -7,7 +7,7 @@ alter TABLE sales.students RENAME column student_name to name;
 alter TABLE sales.students RENAME column student_name to name;
 
 -- can not insert data into a temporary table which is created by other user 
--- even if a session is finished we cano access that table (local temporary Table)
+-- even if a session is finished we can not access that table (local temporary Table)
 INSERT INTO new_tbl
 (id, name)
 VALUES
