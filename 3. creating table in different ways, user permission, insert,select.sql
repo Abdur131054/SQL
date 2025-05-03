@@ -2,7 +2,7 @@
 create table sales.new_tbl (id int, name text);
 drop table sales.new_tbl;
 
---creating temporary table and temporary table and drop table
+--creating temporary table and drop table
 create temporary table  new_tbl (id int, name text);
 
 INSERT INTO new_tbl
@@ -15,11 +15,13 @@ drop table new_tbl
 
 select * FROM new_tbl;
 
--- reating partioned table
+-- creating partioned table
 
 create table new_tbl 
 (id int, name text, creation_date date)
 partition by range(creation_date);
+
+create table new_tbl_2025_03_08 partition of new_tbl default;
 
 --inserting data into partion table
 insert into new_tbl
@@ -28,7 +30,7 @@ VALUES
 (1, 'abcd', '2025-03-7'),
 (2, 'bcd', '2025-03-8');
 
-create table new_tbl_2025_03_08 partition of new_tbl default;
+
 
 --want to see in information schema have how many tables
 
