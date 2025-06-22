@@ -1,0 +1,221 @@
+--DML
+--Insert
+--update
+--Delete
+
+--create table sales.table_name 
+--insert into sales.table_name 
+--insert into sales.table_name
+--(columns)
+--(values)
+--(),
+--();
+
+-- values can put under single quote not under double quote
+
+
+-- Insert values into students tables by giving column name before student id
+
+insert into sales.students 
+(name, student_id)
+values
+('Abcd', 1),
+('Bcde', 2);
+
+--if we are tring to insert values without maintaing column sequence
+--and put value of name column before student_id then it can not insert
+
+insert into sales.students 
+--(name, student_id)
+values
+('Abcd', 1),
+('Bcde', 2);
+-- it wil give error SQL Error [22P02] ERROR invalid input syntax for type integer Abcd
+  --Position 61
+  
+  --if we try to insert values without mentioning column name but maintain column sequence then 
+  --it will insert values
+insert into sales.students 
+values
+(3, 'cdef'),
+(4, 'defg');
+
+--if we insert values under double quote it will give error
+--giving double quote means SQL treat it as architechture(column name)
+
+
+insert into sales.students 
+values
+(3, 'cdef'),
+(4, defg);
+
+-- above code will show an error ERROR column defg does not exist
+  --Position 56
+
+--lets try to insert data on created table from csv file 
+
+
+create schema practice;
+
+create table practice.departmets
+(dept_id serial,
+dept_name varchar,
+emp_id int,
+emp_name varchar,
+is_active bool);
+
+--Altering Table(Add new column)
+ALTER TABLE practice.departmets ADD created_at timestamp DEFAULT now() NULL;
+
+-- createtable by copying
+create table practice.departmet
+as
+select 
+dept_id,
+dept_name
+from practice.departmets;
+
+
+--creating table by from departments tablewithout data
+
+create table practice.departmets_copy
+as
+select 
+dept_id,
+dept_name
+from practice.departmets
+limit 0;
+
+
+--inserting data from another table 
+
+insert into practice.departmets_copy
+select 
+dept_id,
+dept_name
+from practice.departmets
+limit 1; 
+
+--another way of inserting data from other tables
+select 
+dept_id,
+dept_name
+into practice.departmets_copy
+from practice.departmets
+limit 2; 
+
+
+---iserting data by putting data 
+
+insert into practice.departmets_copy 
+select
+8888, 'My Departments';
+
+--inserting data 
+insert into practice.departmets_copy 
+values
+(122,'My Departments 2');
+
+--delete rows
+
+delete from practice.departmets_copy 
+where dept_id=122;
+
+--delete entire data
+--DML
+delete from practice.departmets_copy;
+
+
+--delete entire data using truncate command(can't revert data after using truncate )
+--DDL
+truncate table practice.departmets_copy;
+
+--creating new schema for backup
+create schema backup_abdur;
+
+--backup
+
+select  
+into backup_abdur.departmets_copy_2025_06_10_11_37_am
+from practice.departmets_copy 
+where dept_id=122;
+
+
+--delete from table
+delete from practice.departmets_copy 
+where dept_id=122;
+
+insert into practice.departmets_copy 
+select  from backup_abdur.departmets_copy_2025_06_10_11_37_am;
+
+
+--update
+
+update 
+practice.departmets_copy dc 
+set dept_name='dept_2'
+,dept_id=222
+where dept_id=122;
+
+select  
+into practice.new_dept
+from practice.departmets
+limit 2;
+
+
+
+--Aliasing(Column level, Table level)
+
+select 
+dept_id id, dept_name name
+from practice.departmets d;
+
+select 
+d.dept_id, d.dept_name 
+from practice.departmets d;
+
+--remove those rows from departments 
+--where dept_id exists in new_dept
+--and new_dept id101
+
+delete from 
+practice.departmets d
+using practice.new_dept
+where d.dept_id = new_dept.dept_id
+and new_dept.dept_id101;
+
+--update those rows from departments 
+--set dept_id =100+ xisting id
+--where dept_id does not exists in new_dept
+--and new_dept id102
+
+update
+practice.departmets d
+set d.dept_id = d.dept_id +100
+from practice.new_dept nd 
+where nd.dept_idd.dept_id
+and nd.dept_id102;
+
+--above code shows error for using alias after set
+update
+practice.departmets d
+set dept_id = d.dept_id +1000
+from practice.new_dept nd 
+where nd.dept_idd.dept_id
+and nd.dept_id100;
+
+
+--------
+update
+practice.departmets d
+set dept_id = d.dept_id +9999
+from 
+(select nd.dept_id from 
+practice.new_dept nd
+where nd.dept_id102) ndd
+where ndd.dept_id =d.dept_id;
+
+
+
+
+
