@@ -10,7 +10,7 @@ VALUES
 (124, 'BCD', 54.6),
 (125,'CDE', 59.7);
 
---inserting some values which will ot affected for wrong sequence of value input(will give error)
+--inserting some values which will not affected for wrong sequence of value input(will give error)
 insert into sales.orders
 (order_id , cust_name , amount)
 VALUES 
@@ -69,6 +69,7 @@ where amount> 50
 --ORDER BY – Sorts the final output.
 --LIMIT – Restricts the number of rows returned.
 LIMIT 2;
+
 
 
 
