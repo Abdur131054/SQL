@@ -45,7 +45,7 @@ drop index order_id_idx;
 create table sales.new_tbl (id int primary key , name text)
 
 --create tabele employees
-create table sales.employees (id serial primary key, emp_name VARCHAR, emp_id int, created_at date);
+create table sales.employees (id serial primary key, emp_name VARCHAR, created_at date);
 --here employees mentioned as id 
 drop TABLE sales.employees ;
 
@@ -86,3 +86,4 @@ create table sales.created_from_emp
 as 
 select * from sales.import 
 limit 1;
+
