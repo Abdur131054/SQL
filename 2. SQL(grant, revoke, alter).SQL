@@ -1,4 +1,4 @@
--- DCL/TCL
+-- DCL
 --ceating user
 --password setting
 --validity of password
@@ -23,3 +23,4 @@ ALTER USER abdur
 VALID UNTIL 'infinity';
 --giving ownershipto a user 
 alter table sales.students owner to abdur;
+
