@@ -46,14 +46,16 @@ VALUES
 ('EFG', 58.6),
 ('FGI', 99.7);
 
---SQL Writting Sequence 
---SELECT – Defines the columns to retrieve.
---FROM – Specifies the source table(s).
---WHERE – Filters rows before grouping.
---GROUP BY – Groups data based on specified columns.
---HAVING – Filters grouped data.
---ORDER BY – Sorts the final output.
---LIMIT – Restricts the number of rows returned.
+--SQL Writting Sequence     --------------------------------- Execution Order----------------
+--SELECT – Defines the columns to retrieve.-------------------FROM 
+--FROM – Specifies the source table(s).-----------------------Join
+--WHERE – Filters rows before grouping.-----------------------where
+--GROUP BY – Groups data based on specified columns.---------group by 
+--HAVING – Filters grouped data.----------------------------- Having
+--ORDER BY – Sorts the final output.------------------------- select
+--LIMIT – Restricts the number of rows returned.-------------distinct
+-------------------------------------------------------------order by
+------------------------------------------------------------- limit/offset
 
 
 -- Example 
@@ -69,6 +71,14 @@ where amount> 50
 --ORDER BY – Sorts the final output.
 --LIMIT – Restricts the number of rows returned.
 LIMIT 2;
+
+-- group by Used to group rows that have the same values in specified columns.
+--It comes before aggregate functions like SUM(), AVG(), COUNT(), etc.
+-- Groups are formed first, and then aggregate functions are applied.
+
+-- Having Used to filter groups (not individual rows) after aggregation.
+-- It comes after GROUP BY
+-- Filters are applied after GROUP BY and aggregation have occurred
 
 
 
