@@ -21,6 +21,7 @@ REVOKE SELECT ON TABLE sales.orders FROM abdur;
 --modify/alter role
 ALTER USER abdur
 VALID UNTIL 'infinity';
---giving ownershipto a user 
+--giving ownership to a user 
 alter table sales.students owner to abdur;
+
 
