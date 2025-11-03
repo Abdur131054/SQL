@@ -15,7 +15,7 @@ drop table new_tbl
 
 select * FROM new_tbl;
 
--- creating partioned table
+-- creating partitoned table
 
 create table new_tbl 
 (id int, name text, creation_date date)
@@ -86,4 +86,5 @@ create table sales.created_from_emp
 as 
 select * from sales.import 
 limit 1;
+
 
