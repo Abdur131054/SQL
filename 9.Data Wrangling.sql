@@ -347,3 +347,21 @@ JOIN dep_wise_sal dws
 on emps.department_id=dws.department_id 
 and dws.max_sal = emps.salary
 ;
+-- CTE
+with dep_wise_sal as(
+SELECT 
+emp.department_id,
+max(emp.salary) max_sal
+from 
+practice.employees_dump emp 
+GROUP by 1
+)
+SELECT
+emps.first_name,
+emps.department_id,
+emps.salary
+FROM practice.employees_dump emps
+JOIN dep_wise_sal dws 
+on emps.department_id=dws.department_id 
+and dws.max_sal = emps.salary
+;
